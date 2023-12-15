@@ -12,15 +12,15 @@ export function Home() {
           </h1>
 
           <p className="mt-6 text-lg text-slate-600 text-center max-w-3xl mx-auto dark:text-slate-400">
-            <code className="font-mono font-medium text-sky-500 dark:text-sky-400">remind-us</code> helps you keep{' '}
-            <code className="font-mono font-medium text-sky-500 dark:text-sky-400">track</code> of your friends'
-            birthdays and sends you <code className="font-mono font-medium text-sky-500 dark:text-sky-400">timely</code>{' '}
+            <code className="font-mono font-medium text-sky-500 dark:text-primary">remind-us</code> helps you keep{' '}
+            <code className="font-mono font-medium text-sky-500 dark:text-primary">track</code> of your friends'
+            birthdays and sends you <code className="font-mono font-medium text-sky-500 dark:text-primary">timely</code>{' '}
             reminders. 🎂🎈
           </p>
           <div className="mt-6 sm:mt-10 flex justify-center space-x-6 text-sm">
             <a
               href="/docs"
-              className="bg-slate-900 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-6 rounded-lg w-full flex items-center justify-center sm:w-auto dark:bg-sky-500 dark:highlight-white/20 dark:hover:bg-sky-400"
+              className="bg-slate-900 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-6 rounded-lg w-full flex items-center justify-center sm:w-auto dark:bg-sky-500 dark:highlight-white/20 dark:hover:bg-primary"
             >
               Get started
             </a>

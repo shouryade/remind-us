@@ -19,16 +19,13 @@ export function Header() {
           </div>
           <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
             <li>
-              <a>Item 1</a>
+              <a>Get Started</a>
             </li>
             <li>
-              <a>Item 3</a>
-            </li>
-            <li>
-              <a>Help</a>
+              <a>Stuck?</a>
               <ul class="p-2">
                 <li>
-                  <a>Submenu 1</a>
+                  <a>See the How-To</a>
                 </li>
                 <li>
                   <a>Raise an issue</a>
@@ -45,17 +42,14 @@ export function Header() {
       <div class="navbar-center hidden lg:flex">
         <ul class="menu menu-horizontal px-1">
           <li>
-            <a>Item 1</a>
-          </li>
-          <li>
-            <a>Item 3</a>
+            <a>Get Started</a>
           </li>
           <li>
             <details>
               <summary>Stuck?</summary>
               <ul class="p-2">
                 <li>
-                  <a>ys im stuck daddy</a>
+                  <a>See the How-To</a>
                 </li>
                 <li>
                   <a>Raise an Issue</a>
