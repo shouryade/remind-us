@@ -4,6 +4,23 @@
 	"private": true,
 	"type": "module",
 	"prettier": "@github/prettier-config",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/shouryade/remind-us.git"
+	  },
+	  "keywords": [
+		"firebase",
+		"google cloud",
+		"lambda",
+    	"google-auth",
+		"service account"
+	  ],
+	  "author": "shouryade",
+	  "license": "ISC",
+	  "bugs": {
+		"url": "https://github.com/shouryade/remind-us/issues"
+	  },
+	  "homepage": "https://github.com/shouryade/remind-us#readme",
 	"scripts": {
 		"dev": "vite",
 		"build": "vite build",
@@ -13,6 +30,7 @@
 		"@google-cloud/firestore": "^7.1.0",
 		"@preact/signals": "^1.2.2",
 		"axios": "^1.6.2",
+		"googleapis": "^129.0.0",
 		"preact": "^10.13.1",
 		"preact-iso": "^2.3.2",
 		"preact-render-to-string": "^6.3.1"
