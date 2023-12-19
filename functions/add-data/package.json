@@ -1,0 +1,27 @@
+{
+  "name": "add-data",
+  "version": "1.0.0",
+  "description": "add-data to firebase",
+  "main": "add-data.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shouryade/remind-us.git"
+  },
+  "keywords": [
+    "firebase",
+    "google cloud",
+    "service account"
+  ],
+  "author": "shouryade",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shouryade/remind-us/issues"
+  },
+  "homepage": "https://github.com/shouryade/remind-us#readme",
+  "dependencies": {
+    "@google-cloud/firestore": "^7.1.0"
+  }
+}
