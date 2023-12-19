@@ -32,7 +32,7 @@ const BirthdayComponent = () => {
       bday: nextBirthdayDate,
     }
 
-    // Assuming you're using fetch to send data to the API
+    // Assuming you're using fetch to send data to the API // rep to axios
     fetch(apiEndpoint, {
       method: 'POST',
       headers: {
