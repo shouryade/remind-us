@@ -9,10 +9,6 @@ let succ = signal(false)
 let sub = signal(false)
 
 const BirthdayComponent = () => {
-  const updateFun = () => {
-    progress.value += 33
-    isLogin.value = true
-  }
   const {daysUntilNextBirthday, nextBirthdayDate} = getNextBirthday(month.value, day.value)
   const handleInputChange = (event, type) => {
     const value = event.target.value
