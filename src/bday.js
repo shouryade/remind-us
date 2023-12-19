@@ -2,7 +2,7 @@ export function getNextBirthday(month, day) {
   const today = new Date()
 
   const currentYear = today.getFullYear()
-  const nextBirthday = new Date(currentYear, month - 1, day)
+  let nextBirthday = new Date(currentYear, month - 1, day)
 
   if (today > nextBirthday) {
     nextBirthday.setFullYear(currentYear + 1)
@@ -15,7 +15,7 @@ export function getNextBirthday(month, day) {
   const daysUntilNextBirthday = Math.ceil(timeDiff / (1000 * 60 * 60 * 24))
 
   // Format the date using toLocaleString with Indian time zone
-  const nextBirthdayDate = nextBirthday.toLocaleString('en-IN', {
+  const nextBirthdayDate = nextBirthday.toLocaleString('en-CA', {
     timeZone: 'Asia/Kolkata',
     year: 'numeric',
     month: '2-digit',

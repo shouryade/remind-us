@@ -32,6 +32,7 @@ const BirthdayComponent = () => {
       name: user.value.name,
       bday: nextBirthdayDate,
     }
+    console.log(nextBirthdayDate)
 
     axios
       .post(apiEndpoint, data, {
@@ -41,9 +42,7 @@ const BirthdayComponent = () => {
       })
       .then(response => {
         console.log('API Response:', response.data)
-        if (response.status === 200) {
-          succ.value = true
-        }
+        succ.value = true
       })
       .catch(error => {
         console.error('Error sending data to API:', error)
