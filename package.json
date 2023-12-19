@@ -10,6 +10,7 @@
 		"preview": "vite preview"
 	},
 	"dependencies": {
+		"@google-cloud/firestore": "^7.1.0",
 		"@preact/signals": "^1.2.2",
 		"axios": "^1.6.2",
 		"preact": "^10.13.1",

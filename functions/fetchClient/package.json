@@ -1,0 +1,24 @@
+{
+  "name": "fetchclient",
+  "version": "1.0.0",
+  "description": "fetchClient oauth2 google server application code flow",
+  "main": "fetchClient.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shouryade/remind-us.git"
+  },
+  "keywords": [
+    "oauth2",
+    "google-cloud",
+    "auth-code-flow"
+  ],
+  "author": "shouryade",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shouryade/remind-us/issues"
+  },
+  "homepage": "https://github.com/shouryade/remind-us#readme"
+}
