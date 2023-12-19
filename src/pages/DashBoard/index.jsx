@@ -1,8 +1,7 @@
-import {signal} from '@preact/signals'
 import Login from '../../components/LoginComponent'
 import BirthdayComponent from '../../components/BirthdayComponent'
 
-import {isLogin, progress} from '../../state'
+import {isLogin, progress, submitSucc, HasBirthdaySet} from '../../state'
 export function DashBoard() {
   return (
     <>
@@ -16,7 +15,7 @@ export function DashBoard() {
             <p className="text-3xl"></p>
             <progress className="progress progress-secondary w-[50%]" value={progress.value} max="100"></progress>
             {!isLogin.value && <Login />}
-            {isLogin.value && <BirthdayComponent />}
+            {!HasBirthdaySet.value && isLogin.value && <BirthdayComponent />}
           </div>
         </div>
       </div>
