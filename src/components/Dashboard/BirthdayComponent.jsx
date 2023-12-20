@@ -132,7 +132,7 @@ const BirthdayComponent = () => {
               <figure>
                 <img
                   src="https://i.pinimg.com/originals/34/34/c4/3434c4b692a5176c13079980e94dd6df.gif"
-                  alt="Haruhi Suzumiya Happy Birthday"
+                  alt="Haruhi Suzumiya Happy Birthday GIF"
                 />
               </figure>
               Click on the button below to proceed selecting birthday notifications!

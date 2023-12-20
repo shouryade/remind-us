@@ -14,8 +14,9 @@ export function DashBoard() {
         <div class="hero-overlay bg-opacity-60"></div>
         <div className="text-center shadow-xl shadow-base-300">
           <div className="py-4 bg-base-300 text-center justify-center min-w-[320px] md:min-w-[600px] lg:min-w-[830px] min-h-[610px]">
-            <p className="text-3xl"></p>
-            <progress className="progress progress-secondary w-[50%]" value={progress.value} max="100"></progress>
+            <p className="text-3xl py-3">
+              <progress className="progress progress-secondary w-[50%]" value={progress.value} max="100"></progress>
+            </p>
             {!isLogin.value && <Login />}
             {!HasBirthdaySet.value && isLogin.value && <BirthdayComponent />}
             {HasBirthdaySet.value && isLogin.value && <SelectFriends />}

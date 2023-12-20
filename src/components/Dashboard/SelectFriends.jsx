@@ -1,4 +1,14 @@
 import {user} from '../../state'
+
+const birthday1 = {
+  name: 'Shourya',
+}
+
+const birthdays = [
+  {name: 'Leena Gupta', email: 'shourya.de12@gmail.com', id: 18, bday: '2024-05-17'},
+  {bday: '2024-10-12', name: 'Shourya De', id: 0, email: 'shourya.de12@gmail.com'},
+]
+
 const SelectFriends = () => {
   return (
     <>
@@ -15,27 +25,25 @@ const SelectFriends = () => {
           </div>
           <div className="card-actions justify-center pt-5">
             <div className="flex flex-col">
-              <div className="form-control w-52">
-                <label className="cursor-pointer label">
-                  <span className="label-text">Remember me</span>
-                  <input type="checkbox" className="toggle toggle-primary" checked />
-                </label>
-              </div>
-              <div className="form-control w-52">
-                <label className="cursor-pointer label">
-                  <span className="label-text">Remember me</span>
-                  <input type="checkbox" className="toggle toggle-secondary" checked />
-                </label>
-              </div>
-              <div className="form-control w-52">
-                <label className="cursor-pointer label">
-                  <span className="label-text">Remember me</span>
-                  <input type="checkbox" className="toggle toggle-accent" checked />
-                </label>
+              <div className="form-control w-full pb-4 mb-4">
+                {birthdays.map((person, index) => {
+                  return (
+                    <label className="cursor-pointer label flex items-center" key={index}>
+                      <span className="label-text text-lg text-white">
+                        {person.name}
+                        <div className="badge badge-accent badge-outline badge-lg ml-4 mr-4">
+                          {new Date(person.bday).toLocaleDateString('en-GB').slice(0, 5)}
+                        </div>
+                      </span>
+
+                      <input type="checkbox" className="toggle toggle-info" />
+                    </label>
+                  )
+                })}
               </div>
             </div>
           </div>
-          <button className="btn btn-primary text-center justify-center">Buy Now</button>
+          <button className="btn btn-primary text-center justify-center">Select</button>
         </div>
       </div>
     </>
