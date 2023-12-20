@@ -13,25 +13,24 @@ exports.handler = async (event, context, callback) => {
   const user = JSON.parse(event.body)
   const dataRef = db.collection('users').doc(user.name)
 
-  return dataRef
-    .set({
+  try {
+    await dataRef.set({
       name: user.name,
       email: user.email,
       id: user.id,
       bday: user.bday,
     })
-    .then(response => {
-      console.log('succcess', response)
-      return callback(null, {
-        statusCode: 200,
-        body: JSON.stringify(response),
-      })
+
+    console.log('success')
+    return callback(null, {
+      statusCode: 200,
+      body: JSON.stringify({message: 'Success'}),
     })
-    .catch(error => {
-      console.log('error', error)
-      return callback(null, {
-        statusCode: 400,
-        body: JSON.stringify(error),
-      })
+  } catch (error) {
+    console.log('error', error)
+    return callback(null, {
+      statusCode: 400,
+      body: JSON.stringify({message: 'Error', error: error.message}),
     })
+  }
 }
