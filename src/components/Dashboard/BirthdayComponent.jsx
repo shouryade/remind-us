@@ -1,12 +1,12 @@
 import {signal} from '@preact/signals'
 import axios from 'axios'
 
-import {progress, isLogin, user, submitSucc, HasBirthdaySet} from '../state'
-import {getNextBirthday} from '../bday'
+import {progress, isLogin, user, submitSucc, HasBirthdaySet} from '../../state'
+import {getNextBirthday} from '../../bday'
 let day = signal(1)
 let month = signal(1)
-let succ = signal(false)
-let sub = signal(false)
+let succ = signal(true)
+let sub = signal(true)
 let loading = signal(false)
 
 const BirthdayComponent = () => {
@@ -30,30 +30,24 @@ const BirthdayComponent = () => {
       name: user.value.name,
       bday: nextBirthdayDate,
     }
-    console.log(nextBirthdayDate)
-    setTimeout(() => {
-      console.log('loaded')
-      loading.value = false
-      succ.value = true
-    }, 5000)
 
-    // axios
-    //   .post(apiEndpoint, data, {
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //   })
-    //   .then(response => {
-    //     console.log('API Response:', response.data)
-    //     succ.value = true
-    //   })
-    //   .catch(error => {
-    //     console.error('Error sending data to API:', error)
-    //     succ.value = false
-    //   })
-    //   .finally(() => {
-    //     loading.value = false
-    //   })
+    axios
+      .post(apiEndpoint, data, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then(response => {
+        console.log('API Response:', response.data)
+        succ.value = true
+      })
+      .catch(error => {
+        console.error('Error sending data to API:', error)
+        succ.value = false
+      })
+      .finally(() => {
+        loading.value = false
+      })
   }
   const months = Array.from({length: 12}, (_, index) => index + 1)
   const days = Array.from({length: 31}, (_, index) => index + 1)
@@ -68,6 +62,11 @@ const BirthdayComponent = () => {
             <div className="skeleton h-4 w-full"></div>
             <div className="skeleton h-4 w-full"></div>
           </div>
+          <h1 className="card-title text-2xl pt-2 text-center justify-center font-black">Loading..</h1>
+          <h1 className="card-body text-2xl text-center font-black text-primary">Convincing AI not to turn evil..</h1>
+          <h1 className="card-body text-xl font-normal">
+            Sit back and hold tight as we add your birthhday to the database!
+          </h1>
         </p>
       )}
       <div className="card-body items-center text-center">
@@ -127,9 +126,15 @@ const BirthdayComponent = () => {
         {succ.value && sub.value && (
           <>
             <h1 className="card-title text-5xl font-bold">Hey {user.value.name} 👋</h1>
-            <p className="py-2">
+            <p className="card-body py-2 text-lg">
               It's always a celebration when you're here! 🥳
               <br />
+              <figure>
+                <img
+                  src="https://i.pinimg.com/originals/34/34/c4/3434c4b692a5176c13079980e94dd6df.gif"
+                  alt="Haruhi Suzumiya Happy Birthday"
+                />
+              </figure>
               Click on the button below to proceed selecting birthday notifications!
             </p>
             <div role="alert" className="my-2 alert alert-success">
@@ -146,7 +151,7 @@ const BirthdayComponent = () => {
                   d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
                 />
               </svg>
-              <span>🥳 Your birthday has been added!</span>
+              <span>🥳 Your birthday has been added! 🎂</span>
               <button
                 className="btn btn-neutral"
                 onClick={() => {

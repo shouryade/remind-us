@@ -1,7 +1,9 @@
-import Login from '../../components/LoginComponent'
-import BirthdayComponent from '../../components/BirthdayComponent'
+import Login from '../../components/Dashboard/LoginComponent'
+import BirthdayComponent from '../../components/Dashboard/BirthdayComponent'
+import SelectFriends from '../../components/Dashboard/SelectFriends'
 
 import {isLogin, progress, submitSucc, HasBirthdaySet} from '../../state'
+
 export function DashBoard() {
   return (
     <>
@@ -16,6 +18,7 @@ export function DashBoard() {
             <progress className="progress progress-secondary w-[50%]" value={progress.value} max="100"></progress>
             {!isLogin.value && <Login />}
             {!HasBirthdaySet.value && isLogin.value && <BirthdayComponent />}
+            {HasBirthdaySet.value && isLogin.value && <SelectFriends />}
           </div>
         </div>
       </div>

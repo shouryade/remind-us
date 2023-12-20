@@ -1,6 +1,6 @@
 import {useEffect} from 'preact/hooks'
 import axios from 'axios'
-import {progress, isLogin, url, token} from '../state'
+import {progress, isLogin, url, token} from '../../state'
 
 const Login = () => {
   const authenticate = () => {
