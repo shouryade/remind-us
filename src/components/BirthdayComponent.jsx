@@ -1,12 +1,13 @@
 import {signal} from '@preact/signals'
 import axios from 'axios'
 
-import {progress, isLogin, user, submitSucc} from '../state'
+import {progress, isLogin, user, submitSucc, HasBirthdaySet} from '../state'
 import {getNextBirthday} from '../bday'
 let day = signal(1)
 let month = signal(1)
 let succ = signal(false)
 let sub = signal(false)
+let loading = signal(false)
 
 const BirthdayComponent = () => {
   const {daysUntilNextBirthday, nextBirthdayDate} = getNextBirthday(month.value, day.value)
@@ -21,6 +22,7 @@ const BirthdayComponent = () => {
 
   const handleSubmit = () => {
     sub.value = true
+    loading.value = true
     const apiEndpoint = '/.netlify/functions/add-data'
     const data = {
       email: user.value.email,
@@ -29,115 +31,145 @@ const BirthdayComponent = () => {
       bday: nextBirthdayDate,
     }
     console.log(nextBirthdayDate)
+    setTimeout(() => {
+      console.log('loaded')
+      loading.value = false
+      succ.value = true
+    }, 5000)
 
-    axios
-      .post(apiEndpoint, data, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-      .then(response => {
-        console.log('API Response:', response.data)
-        succ.value = true
-      })
-      .catch(error => {
-        console.error('Error sending data to API:', error)
-        succ.value = false
-      })
+    // axios
+    //   .post(apiEndpoint, data, {
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //   })
+    //   .then(response => {
+    //     console.log('API Response:', response.data)
+    //     succ.value = true
+    //   })
+    //   .catch(error => {
+    //     console.error('Error sending data to API:', error)
+    //     succ.value = false
+    //   })
+    //   .finally(() => {
+    //     loading.value = false
+    //   })
   }
   const months = Array.from({length: 12}, (_, index) => index + 1)
   const days = Array.from({length: 31}, (_, index) => index + 1)
 
   return (
     <div className="card bg-base-300">
-      <div className="card-body items-center text-center">
-        <h1 className="card-title text-5xl font-bold">Hey {user.value.name} 👋</h1>
-        <p className="py-2">
-          It's always a celebration when you're here! 🥳
-          <br />
-          Before you start selecting birthdays for notifications, how about letting us know when your special day is?
-        </p>
-        {!succ.value && (
-          <div className="flex items-center flex-col space-y-4">
-            <label htmlFor="day" className="text-accent">
-              Day
-            </label>
-            <select
-              className="select select-primary w-full max-w-xs"
-              onChange={event => handleInputChange(event, 'day')}
-              value={day.value}
-            >
-              <option disabled selected>
-                Day
-              </option>
-              {days.map(d => (
-                <option key={d} value={d}>
-                  {d}
-                </option>
-              ))}
-            </select>
-
-            <label htmlFor="month" className="text-accent">
-              Month
-            </label>
-            <select
-              className="select select-primary w-full max-w-xs"
-              onChange={event => handleInputChange(event, 'month')}
-              value={month.value}
-            >
-              <option disabled selected>
-                Month
-              </option>
-              {months.map(m => (
-                <option key={m} value={m}>
-                  {m}
-                </option>
-              ))}
-            </select>
-            <p className="text-primary">🥳 I have {daysUntilNextBirthday} days left for my birthday 🥳 </p>
-
-            <button className="btn btn-primary" onClick={handleSubmit}>
-              Submit😎
-            </button>
+      {loading.value && (
+        <p>
+          <div className="flex flex-col gap-4 w-full p-4">
+            <div className="skeleton h-32 w-full"></div>
+            <div className="skeleton h-4 w-full"></div>
+            <div className="skeleton h-4 w-full"></div>
+            <div className="skeleton h-4 w-full"></div>
           </div>
+        </p>
+      )}
+      <div className="card-body items-center text-center">
+        {!succ.value && !loading.value && (
+          <>
+            <h1 className="card-title text-5xl font-bold">Hey {user.value.name} 👋</h1>
+            <p className="py-2">
+              It's always a celebration when you're here! 🥳
+              <br />
+              Before you start selecting birthdays for notifications, how about letting us know when your special day
+              is?
+            </p>
+            <div className="flex items-center flex-col space-y-4">
+              <label htmlFor="day" className="text-accent">
+                Day
+              </label>
+              <select
+                className="select select-primary w-full max-w-xs"
+                onChange={event => handleInputChange(event, 'day')}
+                value={day.value}
+              >
+                <option disabled selected>
+                  Day
+                </option>
+                {days.map(d => (
+                  <option key={d} value={d}>
+                    {d}
+                  </option>
+                ))}
+              </select>
+
+              <label htmlFor="month" className="text-accent">
+                Month
+              </label>
+              <select
+                className="select select-primary w-full max-w-xs"
+                onChange={event => handleInputChange(event, 'month')}
+                value={month.value}
+              >
+                <option disabled selected>
+                  Month
+                </option>
+                {months.map(m => (
+                  <option key={m} value={m}>
+                    {m}
+                  </option>
+                ))}
+              </select>
+              <p className="text-primary">🥳 I have {daysUntilNextBirthday} days left for my birthday 🥳 </p>
+
+              <button className="btn btn-primary" onClick={handleSubmit}>
+                Submit😎
+              </button>
+            </div>
+          </>
         )}
         {succ.value && sub.value && (
-          <div role="alert" className="alert alert-success">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="stroke-current shrink-0 h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-            <span>🥳 Your birthday has been added!</span>
-            <button
-              className="btn btn-neutral"
-              onClick={() => {
-                progress.value = 66
-                submitSucc.value = true
-              }}
-            >
-              Select Birthdays
+          <>
+            <h1 className="card-title text-5xl font-bold">Hey {user.value.name} 👋</h1>
+            <p className="py-2">
+              It's always a celebration when you're here! 🥳
+              <br />
+              Click on the button below to proceed selecting birthday notifications!
+            </p>
+            <div role="alert" className="my-2 alert alert-success">
               <svg
-                class="h-6 w-6 fill-current md:h-8 md:w-8"
                 xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
+                className="stroke-current shrink-0 h-6 w-6"
+                fill="none"
                 viewBox="0 0 24 24"
               >
-                <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"></path>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
               </svg>
-            </button>
-          </div>
+              <span>🥳 Your birthday has been added!</span>
+              <button
+                className="btn btn-neutral"
+                onClick={() => {
+                  progress.value = 66
+                  submitSucc.value = true
+                  HasBirthdaySet.value = true
+                }}
+              >
+                Select Birthdays
+                <svg
+                  class="h-6 w-6 fill-current md:h-8 md:w-8"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"></path>
+                </svg>
+              </button>
+            </div>
+          </>
         )}
-        {!succ.value && sub.value && (
+        {!succ.value && sub.value && !loading.value && (
           <div role="alert" className="alert alert-error">
             <svg
               xmlns="http://www.w3.org/2000/svg"
