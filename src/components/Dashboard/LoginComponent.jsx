@@ -3,8 +3,8 @@ import axios from 'axios'
 import {signal, batch} from '@preact/signals'
 import {progress, isLogin, url, token, user, HasBirthdaySet} from '../../state'
 
-const loading = signal(false)
 const Login = () => {
+  const loading = signal(false)
   const authenticate = () => {
     loading.value = true
     window.location.href = url.value
@@ -38,21 +38,21 @@ const Login = () => {
           console.log('Birthday is set')
           console.log(loading.value)
           batch(() => {
-            progress.value = 66
             HasBirthdaySet.value = true
             isLogin.value = true
+            progress.value = 66
+            loading.value = false
           })
         } else {
           batch(() => {
-            progress.value = 33
             HasBirthdaySet.value = false
             isLogin.value = true
+            progress.value = 33
+            loading.value = false
           })
         }
       } catch (error) {
         console.error('Error fetching user information:', error)
-      } finally {
-        loading.value = false
       }
     }
 
