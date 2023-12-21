@@ -3,11 +3,11 @@ import axios from 'axios'
 import {signal, batch} from '@preact/signals'
 import {progress, isLogin, url, token, user, HasBirthdaySet} from '../../state'
 
+const loading = signal(false)
 const Login = () => {
-  const loading = signal(false)
   const authenticate = () => {
-    window.location.href = url.value
     loading.value = true
+    window.location.href = url.value
   }
 
   const geturlparams = name => {
