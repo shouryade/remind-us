@@ -27,10 +27,7 @@ const Login = () => {
         user.value.name = response.data.name
         user.value.picture = response.data.picture
 
-        const birthdayCheckResponse = await axios.post(
-          '/.netlify/functions/check-birthday',
-          JSON.stringify({email: user.value.email}),
-        )
+        const birthdayCheckResponse = await axios.post('/.netlify/functions/check-birthday', user.value.email)
 
         if (JSON.parse(birthdayCheckResponse.data)) {
           progress.value = 66
