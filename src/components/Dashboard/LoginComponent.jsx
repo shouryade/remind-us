@@ -6,7 +6,6 @@ import {progress, isLogin, url, token, user, HasBirthdaySet} from '../../state'
 const Login = () => {
   const loading = signal(false)
   const authenticate = () => {
-    loading.value = true
     window.location.href = url.value
   }
 
@@ -19,6 +18,7 @@ const Login = () => {
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
+        loading.value = true
         const response = await axios.get('https://www.googleapis.com/oauth2/v2/userinfo', {
           headers: {
             Authorization: `Bearer ${token.value}`,
@@ -41,21 +41,20 @@ const Login = () => {
             HasBirthdaySet.value = true
             isLogin.value = true
             progress.value = 66
-            loading.value = false
           })
         } else {
           batch(() => {
             HasBirthdaySet.value = false
             isLogin.value = true
             progress.value = 33
-            loading.value = false
           })
         }
       } catch (error) {
         console.error('Error fetching user information:', error)
+      } finally {
+        loading.value = false
       }
     }
-
     if (window.location.search.indexOf('token') > -1) {
       token.value = geturlparams('token')
       localStorage.setItem('token', token.value)
@@ -64,6 +63,7 @@ const Login = () => {
       axios.get('/.netlify/functions/google-auth').then(res => {
         url.value = res.data.redirectURL
         localStorage.setItem('url', url.value)
+        loading.value = false
       })
     }
   }, [])
