@@ -35,6 +35,8 @@ const Login = () => {
         const birthdayCheckResponse = await axios.post('/.netlify/functions/check-birthday', {email: user.value.email})
 
         if (JSON.parse(birthdayCheckResponse.data)) {
+          console.log('Birthday is set')
+          console.log(loading.value)
           batch(() => {
             progress.value = 66
             HasBirthdaySet.value = true
