@@ -1,12 +1,12 @@
 import {signal} from '@preact/signals'
 import axios from 'axios'
 
-import {progress, isLogin, user, submitSucc, HasBirthdaySet} from '../../state'
+import {progress, user, submitSucc, HasBirthdaySet} from '../../state'
 import {getNextBirthday} from '../../bday'
 let day = signal(1)
 let month = signal(1)
-let succ = signal(true)
-let sub = signal(true)
+let succ = signal(false)
+let sub = signal(false)
 let loading = signal(false)
 
 const BirthdayComponent = () => {

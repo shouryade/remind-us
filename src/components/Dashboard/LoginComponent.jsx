@@ -1,12 +1,10 @@
 import {useEffect} from 'preact/hooks'
 import axios from 'axios'
-import {progress, isLogin, url, token} from '../../state'
+import {progress, isLogin, url, token, user} from '../../state'
 
 const Login = () => {
   const authenticate = () => {
     window.location.href = url.value
-    progress.value = 33
-    isLogin.value = true
   }
 
   const geturlparams = name => {
@@ -14,22 +12,37 @@ const Login = () => {
     return match && decodeURIComponent(match[1].replace(/\+/g, ''))
   }
 
-  const updateFun = () => {
-    progress.value += 33
-    isLogin.value = true
-  }
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        const response = await axios.get('https://www.googleapis.com/oauth2/v2/userinfo', {
+          headers: {
+            Authorization: `Bearer ${token.value}`,
+          },
+        })
+        user.value.email = response.data.email
+        user.value.id = response.data.id
+        user.value.name = response.data.name
+        user.value.picture = response.data.picture
 
-  // useEffect(() => {
-  //   if (window.location.search.indexOf('token') > -1) {
-  //     token.value = geturlparams('token')
-  //     localStorage.setItem('token', token.value)
-  //   } else {
-  //     axios.get('/.netlify/functions/google-auth').then(res => {
-  //       url.value = res.data.redirectURL
-  //       localStorage.setItem('url', url.value)
-  //     })
-  //   }
-  // }, [])
+        progress.value = 33
+        isLogin.value = true
+      } catch (error) {
+        console.error('Error fetching user information:', error)
+      }
+    }
+
+    if (window.location.search.indexOf('token') > -1) {
+      token.value = geturlparams('token')
+      localStorage.setItem('token', token.value)
+      fetchUserInfo() // Fetch user information after successful authentication
+    } else {
+      axios.get('/.netlify/functions/google-auth').then(res => {
+        url.value = res.data.redirectURL
+        localStorage.setItem('url', url.value)
+      })
+    }
+  }, [])
 
   return (
     <div className="card bg-base-300">
@@ -106,7 +119,7 @@ const Login = () => {
         </figure>
 
         <div className="card-actions mt-10">
-          <button className="btn btn-primary" onClick={updateFun}>
+          <button className="btn btn-primary" onClick={authenticate}>
             Login Now
           </button>
         </div>
