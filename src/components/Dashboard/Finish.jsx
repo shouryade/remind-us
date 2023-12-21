@@ -1,12 +1,14 @@
 import {useEffect} from 'preact/hooks'
 import {signal} from '@preact/signals'
-import {progress} from '../../state'
+import {progress, clearState} from '../../state'
+import {useLocation} from 'preact-iso'
 
 const WellDone = () => {
+  const location = useLocation()
   progress.value = 100
   const calculateTimeLeft = () => {
     // @ts-ignore
-    const difference = new Date('December 22, 2023 00:00:00 GMT') - new Date().getTime()
+    const difference = new Date('December 22, 2023 12:00:00 GMT') - new Date().getTime()
 
     if (difference > 0) {
       const days = Math.floor(difference / (1000 * 60 * 60 * 24))
@@ -80,7 +82,9 @@ const WellDone = () => {
               className="btn btn-neutral"
               onClick={() => {
                 localStorage.clear()
-                window.location.reload()
+                clearState()
+
+                location.route('/')
               }}
             >
               Signout
