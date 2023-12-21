@@ -11,9 +11,8 @@ const db = new Firestore({
 
 module.exports.handler = async event => {
   try {
-    console.log(event.body)
-    const email = JSON.parse(event.body.email)
-    console.log(email)
+    const data = JSON.parse(event.body)
+    const email = data.email
     const docRef = db.collection('users').doc(email)
 
     const doc = await docRef.get()
