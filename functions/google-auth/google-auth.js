@@ -2,7 +2,7 @@ const {google} = require('googleapis')
 
 const {CLIENT_SECRET, CLIENT_ID, REDIRECT_URL} = process.env
 
-// Access scopes for read-only Drive activity.
+// Access scopes for Calendar API and profile info
 const scopes = [
   'https://www.googleapis.com/auth/userinfo.email',
   'https://www.googleapis.com/auth/userinfo.profile',
@@ -10,15 +10,22 @@ const scopes = [
   'https://www.googleapis.com/auth/calendar.events',
 ]
 
-// Generate a url that asks permissions for the Drive activity scope
-
 exports.handler = async () => {
-  let redirectURL
-
   try {
-    redirectURL = await authorize()
-  } catch (e) {
-    console.log('error', e)
+    const redirectURL = await authorize()
+
+    return {
+      statusCode: 200,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': true,
+        'Cache-Control': 'no-cache',
+        'Content-Type': 'text/html',
+      },
+      body: JSON.stringify({redirectURL}),
+    }
+  } catch (error) {
+    console.error('Error:', error)
     return {
       statusCode: 500,
       headers: {
@@ -26,51 +33,19 @@ exports.handler = async () => {
         'Access-Control-Allow-Credentials': true,
       },
       body: JSON.stringify({
-        error: e.message,
+        error: error.message,
       }),
     }
   }
+}
 
-  if (!redirectURL) {
-    return {
-      statusCode: 200,
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Credentials': true,
-      },
-      body: JSON.stringify({
-        message: "Page isn't working!",
-      }),
-    }
-  }
+async function authorize() {
+  const oauth2Client = new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URL)
+  const authorizationUrl = oauth2Client.generateAuthUrl({
+    access_type: 'offline', // 'online' (default) or 'offline' (gets refresh_token)
+    scope: scopes, // Pass in the scopes array defined above.
+    include_granted_scopes: true, // Enable incremental authorization. Recommended as a best practice.
+  })
 
-  return {
-    statusCode: 200,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Credentials': true,
-      'Cache-Control': 'no-cache',
-      'Content-Type': 'text/html',
-    },
-    body: JSON.stringify({redirectURL}),
-  }
-
-  function authorize() {
-    const oauth2Client = new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URL)
-    return getAccessToken(oauth2Client)
-  }
-
-  function getAccessToken(oauth2Client) {
-    const authorizationUrl = oauth2Client.generateAuthUrl({
-      // 'online' (default) or 'offline' (gets refresh_token)
-      access_type: 'offline',
-      /** Pass in the scopes array defined above.
-       * Alternatively, if only one scope is needed, you can pass a scope URL as a string */
-      scope: scopes,
-      // Enable incremental authorization. Recommended as a best practice.
-      include_granted_scopes: true,
-    })
-
-    return authorizationUrl
-  }
+  return authorizationUrl
 }

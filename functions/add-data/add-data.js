@@ -9,28 +9,31 @@ const db = new Firestore({
   },
 })
 
-exports.handler = async (event, context, callback) => {
-  const user = JSON.parse(event.body)
-  const dataRef = db.collection('users').doc(user.name)
-
+exports.handler = async event => {
   try {
+    const user = JSON.parse(event.body)
+    const dataRef = db.collection('users').doc(user.email)
+
     await dataRef.set({
       name: user.name,
+      picture: user.picture,
       email: user.email,
       id: user.id,
       bday: user.bday,
     })
 
     console.log('success')
-    return callback(null, {
+
+    return {
       statusCode: 200,
       body: JSON.stringify({message: 'Success'}),
-    })
+    }
   } catch (error) {
-    console.log('error', error)
-    return callback(null, {
+    console.error('error', error)
+
+    return {
       statusCode: 400,
-      body: JSON.stringify({message: 'Error', error: error.message}),
-    })
+      body: JSON.stringify({message: 'Error saving data'}),
+    }
   }
 }
