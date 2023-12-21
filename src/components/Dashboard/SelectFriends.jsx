@@ -1,20 +1,37 @@
 import {signal} from '@preact/signals'
 import {user, token} from '../../state'
 import axios from 'axios'
+import {useEffect} from 'preact/hooks'
 
 // IIFE to fetch birthdays from API (oh god why was this so hard)
-const birthdays = await (async () => {
-  try {
-    const response = await axios.get('/.netlify/functions/fetch-birthdays')
-    return response.data
-  } catch (error) {
-    console.error('Error fetching birthdays:', error)
-    return null
-  }
-})()
+// const birthdays = await (async () => {
+//   try {
+//     const response = await axios.get('/.netlify/functions/fetch-birthdays')
+//     return response.data
+//   } catch (error) {
+//     console.error('Error fetching birthdays:', error)
+//     return null
+//   }
+// })()
 
 const SelectFriends = () => {
-  const selections = signal(new Array(birthdays.length).fill(false))
+  const selections = signal([])
+
+  const birthdays = []
+
+  useEffect(() => {
+    const fetchBirthdays = async () => {
+      try {
+        const response = await axios.get('/.netlify/functions/fetch-birthdays')
+        const birthdays = response.data
+        selections.value = new Array(birthdays.length).fill(false)
+      } catch (error) {
+        console.error('Error fetching birthdays:', error)
+      }
+    }
+
+    fetchBirthdays()
+  }, []) // Empty dependency array to ensure the effect runs only once when the component mounts
 
   let data = []
 
