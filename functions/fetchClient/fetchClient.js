@@ -15,7 +15,7 @@ exports.handler = async event => {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Credentials': true,
         'Cache-Control': 'no-cache',
-        Location: `${referer}?token=${token.tokens.access_token}`,
+        Location: `https://remindus.netlify.app/dashboard?token=${token.tokens.access_token}`,
       },
       body: JSON.stringify({event: token.tokens.access_token}),
     }
