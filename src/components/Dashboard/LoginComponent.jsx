@@ -27,7 +27,8 @@ const Login = () => {
         user.value.name = response.data.name
         user.value.picture = response.data.picture
 
-        const birthdayCheckResponse = await axios.post('/.netlify/functions/check-birthday', user.value.email)
+        /*
+        const birthdayCheckResponse = await axios.post('/.netlify/functions/check-birthday', {email: user.value.email})
 
         if (JSON.parse(birthdayCheckResponse.data)) {
           progress.value = 66
@@ -35,7 +36,8 @@ const Login = () => {
         } else {
           progress.value = 33
           HasBirthdaySet.value = false
-        }
+        }*/
+        progress.value = 33
         isLogin.value = true
       } catch (error) {
         console.error('Error fetching user information:', error)

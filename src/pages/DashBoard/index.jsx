@@ -3,7 +3,7 @@ import BirthdayComponent from '../../components/Dashboard/BirthdayComponent'
 import SelectFriends from '../../components/Dashboard/SelectFriends'
 
 import {isLogin, progress, HasBirthdaySet} from '../../state'
-import WellDone from '../../components/Dashboard/FInish'
+import WellDone from '../../components/Dashboard/Finish'
 
 export function DashBoard() {
   return (

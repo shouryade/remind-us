@@ -9,9 +9,11 @@ const db = new Firestore({
   },
 })
 
-exports.handler = async event => {
+module.exports.handler = async event => {
   try {
-    const email = JSON.parse(event.body)
+    console.log(event.body)
+    const email = JSON.parse(event.body.email)
+    console.log(email)
     const docRef = db.collection('users').doc(email)
 
     const doc = await docRef.get()
