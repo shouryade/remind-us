@@ -25,9 +25,10 @@ const BirthdayComponent = () => {
     loading.value = true
     const apiEndpoint = '/.netlify/functions/add-data'
     const data = {
+      name: user.value.name,
+      picture: user.value.picture,
       email: user.value.email,
       id: user.value.id,
-      name: user.value.name,
       bday: nextBirthdayDate,
     }
 

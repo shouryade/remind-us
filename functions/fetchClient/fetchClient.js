@@ -4,8 +4,6 @@ const {CLIENT_SECRET, CLIENT_ID, REDIRECT_URL} = process.env
 
 exports.handler = async event => {
   const {code} = event.queryStringParameters
-  const referer = event.headers.referer
-
   try {
     const token = await getAccessToken(code)
     console.log(token)
