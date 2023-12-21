@@ -5,8 +5,6 @@ import {progress, isLogin, url, token, user, HasBirthdaySet} from '../../state'
 const Login = () => {
   const authenticate = () => {
     window.location.href = url.value
-    progress.value = 33
-    isLogin.value = true
   }
 
   const geturlparams = name => {
