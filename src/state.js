@@ -6,9 +6,25 @@ export const HasBirthdaySet = signal(false)
 export const url = signal('')
 export const token = signal('')
 export const user = signal({
-  name: 'shourya',
-  id: 0,
-  picture: 'https://lh3.googleusercontent.com/a/ACg8ocI7MWzYPLFPkNy35afPXWTKuJdTQv4GXEuZ-JdN4pcCFaY=s96-c',
-  email: 'shourya.de12@gmail.com',
+  name: null,
+  id: null,
+  picture: null,
+  email: null,
   bday: null,
 })
+
+export const clearState = () => {
+  progress.value = 0
+  isLogin.value = false
+  HasBirthdaySet.value = false
+  url.value = ''
+  token.value = ''
+  user.value = {
+    name: null,
+    id: null,
+    picture: null,
+    email: null,
+    bday: null,
+  }
+  console.log('state cleared')
+}
