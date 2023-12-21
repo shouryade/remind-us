@@ -6,6 +6,7 @@ import {progress, isLogin, url, token, user, HasBirthdaySet} from '../../state'
 const Login = () => {
   const loading = signal(false)
   const authenticate = () => {
+    loading.value = true
     window.location.href = url.value
   }
 
