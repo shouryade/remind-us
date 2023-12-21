@@ -80,6 +80,7 @@ const WellDone = () => {
               className="btn btn-neutral"
               onClick={() => {
                 localStorage.clear()
+                window.location.href = '/'
                 window.location.reload()
               }}
             >
