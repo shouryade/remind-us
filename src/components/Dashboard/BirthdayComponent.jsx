@@ -1,7 +1,7 @@
 import {signal} from '@preact/signals'
 import axios from 'axios'
 
-import {progress, user, submitSucc, HasBirthdaySet} from '../../state'
+import {progress, user, HasBirthdaySet} from '../../state'
 import {getNextBirthday} from '../../bday'
 let day = signal(1)
 let month = signal(1)
@@ -157,7 +157,6 @@ const BirthdayComponent = () => {
                 className="btn btn-neutral"
                 onClick={() => {
                   progress.value = 66
-                  submitSucc.value = true
                   HasBirthdaySet.value = true
                 }}
               >

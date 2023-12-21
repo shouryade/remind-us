@@ -1,10 +1,12 @@
 import {useEffect} from 'preact/hooks'
 import axios from 'axios'
-import {progress, isLogin, url, token, user} from '../../state'
+import {progress, isLogin, url, token, user, HasBirthdaySet} from '../../state'
 
 const Login = () => {
   const authenticate = () => {
     window.location.href = url.value
+    progress.value = 33
+    isLogin.value = true
   }
 
   const geturlparams = name => {
@@ -25,7 +27,18 @@ const Login = () => {
         user.value.name = response.data.name
         user.value.picture = response.data.picture
 
-        progress.value = 33
+        const birthdayCheckResponse = await axios.post(
+          '/.netlify/functions/check-birthday',
+          JSON.stringify({email: user.value.email}),
+        )
+
+        if (JSON.parse(birthdayCheckResponse.data)) {
+          progress.value = 66
+          HasBirthdaySet.value = true
+        } else {
+          progress.value = 33
+          HasBirthdaySet.value = false
+        }
         isLogin.value = true
       } catch (error) {
         console.error('Error fetching user information:', error)
@@ -35,7 +48,7 @@ const Login = () => {
     if (window.location.search.indexOf('token') > -1) {
       token.value = geturlparams('token')
       localStorage.setItem('token', token.value)
-      fetchUserInfo() // Fetch user information after successful authentication
+      fetchUserInfo()
     } else {
       axios.get('/.netlify/functions/google-auth').then(res => {
         url.value = res.data.redirectURL

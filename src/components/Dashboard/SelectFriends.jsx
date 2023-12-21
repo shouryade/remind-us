@@ -1,10 +1,17 @@
 import {signal} from '@preact/signals'
-import {user} from '../../state'
+import {user, token} from '../../state'
+import axios from 'axios'
 
-const birthdays = [
-  {name: 'Leena Gupta', email: 'shourya.de12@gmail.com', id: 18, bday: '2024-05-01', picture: user.value.picture},
-  {bday: '2024-05-17', name: 'Shourya De', id: 0, email: 'shourya.de12@gmail.com', picture: user.value.picture},
-]
+// IIFE to fetch birthdays from API (oh god why was this so hard)
+const birthdays = await (async () => {
+  try {
+    const response = await axios.get('/.netlify/functions/fetch-birthdays')
+    return response.data
+  } catch (error) {
+    console.error('Error fetching birthdays:', error)
+    return null
+  }
+})()
 
 const SelectFriends = () => {
   const selections = signal(new Array(birthdays.length).fill(false))

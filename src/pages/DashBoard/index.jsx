@@ -2,7 +2,8 @@ import Login from '../../components/Dashboard/LoginComponent'
 import BirthdayComponent from '../../components/Dashboard/BirthdayComponent'
 import SelectFriends from '../../components/Dashboard/SelectFriends'
 
-import {isLogin, progress, submitSucc, HasBirthdaySet} from '../../state'
+import {isLogin, progress, HasBirthdaySet} from '../../state'
+import WellDone from '../../components/Dashboard/FInish'
 
 export function DashBoard() {
   return (
@@ -19,7 +20,8 @@ export function DashBoard() {
             </p>
             {!isLogin.value && <Login />}
             {!HasBirthdaySet.value && isLogin.value && <BirthdayComponent />}
-            {HasBirthdaySet.value && isLogin.value && <SelectFriends />}
+            {/* {HasBirthdaySet.value && isLogin.value && <SelectFriends />} */}
+            {HasBirthdaySet.value && isLogin.value && <WellDone />}
           </div>
         </div>
       </div>
