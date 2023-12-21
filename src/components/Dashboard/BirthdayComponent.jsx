@@ -75,10 +75,10 @@ const BirthdayComponent = () => {
           <>
             <h1 className="card-title text-5xl font-bold">Hey {user.value.name} 👋</h1>
             <p className="py-2">
-              It's always a celebration when you're here! 🥳
+              <span className="text-2xl">Let us know when your special day is?</span>
               <br />
-              Before you start selecting birthdays for notifications, how about letting us know when your special day
-              is?
+              <br />
+              It's always a celebration when you're here! 🥳
             </p>
             <div className="flex items-center flex-col space-y-4">
               <label htmlFor="day" className="text-accent">
