@@ -32,12 +32,12 @@ const Login = () => {
         if (JSON.parse(birthdayCheckResponse.data)) {
           progress.value = 66
           HasBirthdaySet.value = true
+          isLogin.value = true
         } else {
           progress.value = 33
           HasBirthdaySet.value = false
+          isLogin.value = true
         }
-        // progress.value = 33
-        isLogin.value = true
       } catch (error) {
         console.error('Error fetching user information:', error)
       }
