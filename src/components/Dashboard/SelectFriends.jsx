@@ -1,15 +1,21 @@
+import {signal} from '@preact/signals'
 import {user} from '../../state'
 
-const birthday1 = {
-  name: 'Shourya',
-}
-
 const birthdays = [
-  {name: 'Leena Gupta', email: 'shourya.de12@gmail.com', id: 18, bday: '2024-05-17'},
-  {bday: '2024-10-12', name: 'Shourya De', id: 0, email: 'shourya.de12@gmail.com'},
+  {name: 'Leena Gupta', email: 'shourya.de12@gmail.com', id: 18, bday: '2024-05-01', picture: user.value.picture},
+  {bday: '2024-05-17', name: 'Shourya De', id: 0, email: 'shourya.de12@gmail.com', picture: user.value.picture},
 ]
 
 const SelectFriends = () => {
+  const selections = signal(new Array(birthdays.length).fill(false))
+
+  let data = []
+
+  const handleChange = index => {
+    selections.value[index] = !selections.value[index]
+    data = birthdays.filter((_, i) => selections.value[i])
+  }
+
   return (
     <>
       <div className="card bg-base-300">
@@ -29,21 +35,42 @@ const SelectFriends = () => {
                 {birthdays.map((person, index) => {
                   return (
                     <label className="cursor-pointer label flex items-center" key={index}>
+                      <div className="avatar">
+                        <div className="w-12 rounded-full mr-2">
+                          <img src={person.picture} />
+                        </div>
+                      </div>
                       <span className="label-text text-lg text-white">
                         {person.name}
                         <div className="badge badge-accent badge-outline badge-lg ml-4 mr-4">
                           {new Date(person.bday).toLocaleDateString('en-GB').slice(0, 5)}
                         </div>
                       </span>
-
-                      <input type="checkbox" className="toggle toggle-info" />
+                      <input
+                        type="checkbox"
+                        className="toggle toggle-info"
+                        id={`${person.id}`}
+                        name={person.name}
+                        value={person.bday}
+                        checked={selections[index]}
+                        onChange={e => {
+                          handleChange(index)
+                        }}
+                      />
                     </label>
                   )
                 })}
               </div>
             </div>
           </div>
-          <button className="btn btn-primary text-center justify-center">Select</button>
+          <button
+            className="btn btn-primary text-center justify-center"
+            onClick={() => {
+              console.log(data)
+            }}
+          >
+            Prepare for Notifications!
+          </button>
         </div>
       </div>
     </>

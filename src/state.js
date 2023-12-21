@@ -9,6 +9,7 @@ export const token = signal('')
 export const user = signal({
   name: 'shourya',
   id: 0,
+  picture: 'https://lh3.googleusercontent.com/a/ACg8ocI7MWzYPLFPkNy35afPXWTKuJdTQv4GXEuZ-JdN4pcCFaY=s96-c',
   email: 'shourya.de12@gmail.com',
   bday: null,
 })
