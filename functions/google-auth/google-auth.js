@@ -13,7 +13,7 @@ const scopes = [
 exports.handler = async () => {
   try {
     const redirectURL = await authorize()
-
+    console.log('redirectURL', redirectURL)
     return {
       statusCode: 200,
       headers: {

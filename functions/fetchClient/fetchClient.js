@@ -8,7 +8,7 @@ exports.handler = async event => {
 
   try {
     const token = await getAccessToken(code)
-
+    console.log(token)
     return {
       statusCode: 302,
       headers: {
