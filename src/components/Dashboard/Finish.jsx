@@ -46,58 +46,35 @@ const WellDone = () => {
             />
           </figure>
           <div className="text-lg">
-            <p className="text-primary pt-2">
-              You would be able to select birthdays when all your friends have logged in and set their birthdays.
-            </p>
-            <p className="text-warning">Time before the feature is released:</p>
+            <p className="text-yellow-100 pt-4">Yay! 🎉 You've successfully added birthdays to your calendar! 📅😄</p>
           </div>
-          <div className="grid grid-flow-col gap-5 text-center auto-cols-max text-warning justify-center">
-            <div className="flex flex-col">
-              <span className="countdown font-mono text-5xl">
-                <span style={{'--value': timeLeft.value.days}}></span>
-              </span>
-              days
-            </div>
-            <div className="flex flex-col">
-              <span className="countdown font-mono text-5xl">
-                <span style={{'--value': timeLeft.value.hours}}></span>
-              </span>
-              hours
-            </div>
-            <div className="flex flex-col">
-              <span className="countdown font-mono text-5xl">
-                <span style={{'--value': timeLeft.value.minutes}}></span>
-              </span>
-              min
-            </div>
-            <div className="flex flex-col">
-              <span className="countdown font-mono text-5xl">
-                <span style={{'--value': timeLeft.value.seconds}}></span>
-              </span>
-              sec
-            </div>
-          </div>
-          <div className="card-actions justify-center pt-5">
-            <button
-              className="btn btn-neutral"
-              onClick={() => {
-                localStorage.clear()
-                clearState()
+          <div className="text-2xl">
+            <span className="text-white">
+              Don't forget to star <span className="text-info">remind-us</span> on{' '}
+              <a href="https://github.com/shouryade/remind-us">GitHub</a>!
+            </span>
+            <div className="card-actions justify-center pt-5">
+              <button
+                className="btn btn-neutral"
+                onClick={() => {
+                  localStorage.clear()
+                  clearState()
 
-                location.route('/')
-              }}
-            >
-              Signout
-              <svg
-                class="h-6 w-6 fill-current md:h-8 md:w-8"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
+                  location.route('/')
+                }}
               >
-                <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"></path>
-              </svg>
-            </button>
+                Signout
+                <svg
+                  class="h-6 w-6 fill-current md:h-8 md:w-8"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"></path>
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       </div>
