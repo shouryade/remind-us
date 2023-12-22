@@ -13,6 +13,8 @@ export const user = signal({
   bday: null,
 })
 
+export const SelectedFriends = signal(false)
+
 export const clearState = () => {
   progress.value = 0
   isLogin.value = false
@@ -26,5 +28,6 @@ export const clearState = () => {
     email: null,
     bday: null,
   }
+  SelectedFriends.value = false
   console.log('state cleared')
 }

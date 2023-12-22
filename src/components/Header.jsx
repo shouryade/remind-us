@@ -19,20 +19,19 @@ export function Header() {
           </div>
           <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
             <li>
-              <a>Get Started</a>
+              <a href="/dashboard">Get Started</a>
             </li>
             <li>
-              <a>Stuck?</a>
-              <ul class="p-2">
-                <li>
-                  <a>See the How-To</a>
-                </li>
-                <li>
-                  <a href="https://github.com/shouryade/remind-us/issues/new" target="_blank" rel="noopener noreferrer">
-                    Raise an issue
-                  </a>
-                </li>
-              </ul>
+              <a href="https://github.com/shouryade/remind-us/issues/new" target="_blank" rel="noopener noreferrer">
+                Raise an issue
+                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+                  <path d="M0 0h24v24H0z" fill="none" />
+                  <path
+                    d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"
+                    fill="#6b77ea"
+                  />
+                </svg>
+              </a>
             </li>
           </ul>
         </div>
@@ -44,22 +43,19 @@ export function Header() {
       <div class="navbar-center hidden lg:flex">
         <ul class="menu menu-horizontal px-1">
           <li>
-            <a>Get Started</a>
+            <a href="/dashboard">Get Started</a>
           </li>
           <li>
-            <details>
-              <summary>Stuck?</summary>
-              <ul class="p-2">
-                <li>
-                  <a>See the How-To</a>
-                </li>
-                <li>
-                  <a href="https://github.com/shouryade/remind-us/issues/new" target="_blank" rel="noopener noreferrer">
-                    Raise an Issue
-                  </a>
-                </li>
-              </ul>
-            </details>
+            <a href="https://github.com/shouryade/remind-us/issues/new" target="_blank" rel="noopener noreferrer">
+              Raise an issue
+              <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+                <path d="M0 0h24v24H0z" fill="none" />
+                <path
+                  d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"
+                  fill="#6b77ea"
+                />
+              </svg>
+            </a>
           </li>
         </ul>
       </div>
@@ -72,15 +68,5 @@ export function Header() {
         </a>
       </div>
     </div>
-    // <header>
-    // 	<nav>
-    // 		<a href="/" class={url == '/' && 'active'}>
-    // 			Home
-    // 		</a>
-    // 		<a href="/404" class={url == '/404' && 'active'}>
-    // 			404
-    // 		</a>
-    // 	</nav>
-    // </header>
   )
 }
